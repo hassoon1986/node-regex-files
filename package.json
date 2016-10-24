@@ -1,0 +1,26 @@
+{
+  "name": "regex-files",
+  "version": "0.1.0",
+  "description": "use regex find files",
+  "main": "regexfiles.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hbxeagle/node-regex-files.git"
+  },
+  "keywords": [
+    "node",
+    "regex",
+    "find",
+    "files",
+    "golb"
+  ],
+  "author": "hbxeagle",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hbxeagle/node-regex-files/issues"
+  },
+  "homepage": "https://github.com/hbxeagle/node-regex-files#readme"
+}

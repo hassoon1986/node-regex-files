@@ -1,13 +1,10 @@
-# node-regex-files
-
-```js
 var regexfiles = require('./regexfiles.js')
 
-var rIncludes = [/\.html$/i];
-var rExcludes = [/\/node_modules\//, /\/\.git\//, /\/\.tmp\//];
+var _regIncludes = [/\.html$/i];
+var _regExcludes = [/\/node_modules\//, /\/\.git\//, /\/\.tmp\//];
 
 var st = new Date();
-regexfiles('./', rIncludes, rExcludes, function (err, subfiles) {
+regexfiles('./', _regIncludes, _regExcludes, function (err, subfiles) {
   if (err) {
     console.log(chalk.red(err.message));
     return;
@@ -27,4 +24,3 @@ regexfiles('./', _regIncludes, [], function (err, subfiles) {
   var end = st2.getTime() - (new Date()).getTime()
   console.log(end)
 });
-```
