@@ -2,21 +2,21 @@
   var fs = require('fs');
   var path = require('path');
 
-  var regInclude = function(file, regIncludes) {
-    if(!regExclude || regExclude.length < 1) {
+  var regInclude = function(file, rIncludes) {
+    if(!rIncludes || rIncludes.length < 1) {
       return true;
     }
-    var len = regIncludes.length;
+    var len = rIncludes.length;
     var i = 0;
     for (; i < len; i++) {
-      if (file.match(regIncludes[i])) {
+      if (file.match(rIncludes[i])) {
         return true;
       }
     }
     return false;
   };
 
-  var regExclude = function(dir, regExcludes, regIncludes, done) {
+  var regExclude = function(dir, rExcludes, rIncludes, done) {
     var inResults = [];
 
     fs.readdir(dir, function(err, list) {
@@ -30,24 +30,24 @@
 
         var excluded = false;
 
-        if(regExcludes && regExcludes.length > 0) {
-          var len = regExcludes.length;
+        if(rExcludes && rExcludes.length > 0) {
+          var len = rExcludes.length;
           var i = 0;
           for (; i < len; i++) {
-            if (file.match(regExcludes[i])) {
+            if (file.match(rExcludes[i])) {
               excluded = true;
             }
           }
         }
 
         if (excluded === false) {
-          if(regInclude(file, regIncludes)) {
+          if(regInclude(file, rIncludes)) {
             inResults.push(file)
           }
 
           fs.stat(file, function(err, stat) {
             if (stat && stat.isDirectory()) {
-              regExclude(file, regExcludes, regIncludes, function(err, inres) {
+              regExclude(file, rExcludes, rIncludes, function(err, inres) {
                 inResults = inResults.concat(inres);
                 if (!--pending) {
                   done(null, inResults);
@@ -68,8 +68,8 @@
     });
   };
 
-  var regexfiles = function(dir, regIncludes, regExcludes, done) {
-    regExclude(dir, regExcludes, regIncludes, function(err, files) {
+  var regexfiles = function(dir, rExcludes, rIncludes, done) {
+    regExclude(dir, rExcludes, rIncludes, function(err, files) {
       done(null, files);
       return;
     });

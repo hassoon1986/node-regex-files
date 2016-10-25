@@ -1,11 +1,11 @@
 var regexfiles = require('./regexfiles.js')
 
 var dir = './'; // the root dir.
-var _rIncludes = [/\.html$/i]; // fetch files that matched this conditions.
-var _rExcludes = [/\/node_modules\//, /\/\.git\//, /\/\.tmp\//]; // exclude files that matched this conditions, do exclude first.
+var rExcludes = [/\/node_modules\//, /\/\.git\//, /\/\.tmp\//]; // exclude files that matched this conditions, do exclude first.
+var rIncludes = [/\.html$/i]; // fetch files that matched this conditions. If it is empty, then it is not filtered.
 
 var st = new Date();
-regexfiles(dir, _rIncludes, _rExcludes, function (err, subfiles) {
+regexfiles(dir, rExcludes, rIncludes, function (err, subfiles) {
   if (err) {
     console.log(err.message);
     return;
@@ -16,7 +16,7 @@ regexfiles(dir, _rIncludes, _rExcludes, function (err, subfiles) {
 });
 
 var st2 = new Date();
-regexfiles(dir, _rIncludes, [], function (err, subfiles) {
+regexfiles(dir, [], rIncludes, function (err, subfiles) {
   if (err) {
     console.log(err.message);
     return;
@@ -27,7 +27,7 @@ regexfiles(dir, _rIncludes, [], function (err, subfiles) {
 });
 
 var st3 = new Date();
-regexfiles(dir, [], _rExcludes, function (err, subfiles) {
+regexfiles(dir, rExcludes, [], function (err, subfiles) {
   if (err) {
     console.log(err.message);
     return;
