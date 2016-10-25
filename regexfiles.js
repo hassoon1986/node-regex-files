@@ -3,6 +3,9 @@
   var path = require('path');
 
   var regInclude = function(file, regIncludes) {
+    if(!regExclude || regExclude.length < 1) {
+      return true;
+    }
     var len = regIncludes.length;
     var i = 0;
     for (; i < len; i++) {
@@ -66,14 +69,10 @@
   };
 
   var regexfiles = function(dir, regIncludes, regExcludes, done) {
-    if(!regExclude || regExclude.length < 1) {
-      return [];
-    }
     regExclude(dir, regExcludes, regIncludes, function(err, files) {
       done(null, files);
       return;
     });
-
   };
   module.exports = regexfiles;
 })();
